@@ -42,11 +42,7 @@ _* Для macOS: требуется разрешение на запись эк�
 ### Клиент
 ```bash
 git clone https://github.com/AhmedLyanov/VideoDemonstration.git
-<<<<<<< HEAD
 cd app
-=======
-cd VideoDemonstration
->>>>>>> 4fb5d72c13eae2eeba2c5c59fc48e5147a564b13
 npm i 
 npm start
 ```
