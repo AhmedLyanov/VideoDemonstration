@@ -77,24 +77,33 @@ async function getSources() {
 
 async function selectSource(sourceId) {
   try {
-    localStream = await navigator.mediaDevices.getUserMedia({
+    console.log('Выбран sourceId:', sourceId); 
+
+
+    const constraints = {
       audio: false,
       video: {
         mandatory: {
           chromeMediaSource: 'desktop',
           chromeMediaSourceId: sourceId,
-          maxWidth: window.screen.width,
-          maxHeight: window.screen.height
-        }
+        },
+        optional: [
+          { maxWidth: window.screen.width },
+          { maxHeight: window.screen.height }
+        ]
       }
-    });
+    };
+
+
+    localStream = await navigator.mediaDevices.getUserMedia(constraints);
 
     console.log('Локальный поток создан:', localStream.getVideoTracks());
 
+   
     const video = document.getElementById('preview');
     video.srcObject = localStream;
     video.play();
-
+    
     socket.emit('request-clients');
     updateConnectionStatus(true);
   } catch (error) {
